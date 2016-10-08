@@ -13,7 +13,6 @@ var sampleHandler = http.HandlerFunc(rootHandler)
 func TestNormal(t *testing.T) {
 	ts := httptest.NewServer(sampleHandler)
 	defer ts.Close()
-	// リクエストの送信先はテストサーバのURLへ。
 	r, err := http.Get(ts.URL)
 	if err != nil {
 		t.Fatalf("Error by http.Get(). %v", err)
@@ -26,7 +25,6 @@ func TestNormal(t *testing.T) {
 func TestBody(t *testing.T) {
 	ts := httptest.NewServer(sampleHandler)
 	defer ts.Close()
-	// リクエストの送信先はテストサーバのURLへ。
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", ts.URL, nil)
 	req.Header.Add("Hoge", "Fuga")
