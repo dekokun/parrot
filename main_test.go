@@ -1,8 +1,10 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -18,5 +20,28 @@ func TestNormal(t *testing.T) {
 	}
 	if r.StatusCode != 200 {
 		t.Fatalf("Error by status code. %v", r.Status)
+	}
+}
+
+func TestBody(t *testing.T) {
+	ts := httptest.NewServer(sampleHandler)
+	defer ts.Close()
+	// リクエストの送信先はテストサーバのURLへ。
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", ts.URL, nil)
+	req.Header.Add("Hoge", "Fuga")
+	r, err := client.Do(req)
+	if err != nil {
+		t.Fatalf("Error by http.Get(). %v", err)
+	}
+	data, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		t.Fatalf("Error by ioutil.ReadAll(). %v", err)
+	}
+	if r.StatusCode != 200 {
+		t.Fatalf("Error by status code. %v", r.Status)
+	}
+	if !strings.Contains(string(data), `"Hoge":["Fuga"]`) {
+		t.Fatalf("Error by not contains header. %v", string(data))
 	}
 }
