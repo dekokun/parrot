@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -26,6 +29,9 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var port int
+	flag.IntVar(&port, "port", 30000, "listen port")
+	flag.Parse()
 	http.HandleFunc("/", rootHandler)
-	log.Fatal(http.ListenAndServe("localhost:30000", nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", strconv.Itoa(port)), nil))
 }
