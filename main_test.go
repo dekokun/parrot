@@ -45,3 +45,18 @@ func TestBody(t *testing.T) {
 		t.Fatalf("Error by not contains header. %v", string(data))
 	}
 }
+
+func TestHeader(t *testing.T) {
+	ts := httptest.NewServer(sampleHandler)
+	defer ts.Close()
+	r, err := http.Get(ts.URL + "?hoge=fuga")
+	if err != nil {
+		t.Fatalf("Error by http.Get(). %v", err)
+	}
+	if r.StatusCode != 200 {
+		t.Fatalf("Error by status code. %v", r.Status)
+	}
+	if r.Header["Hoge"][0] == "Fuga" {
+		t.Fatalf("Error by header. %v", r.Header)
+	}
+}
