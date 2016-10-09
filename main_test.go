@@ -1,10 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"strings"
+	"reflect"
 	"testing"
 )
 
@@ -39,7 +40,13 @@ func TestBody(t *testing.T) {
 	if r.StatusCode != 200 {
 		t.Fatalf("Error by status code. %v", r.Status)
 	}
-	if !strings.Contains(string(data), `"Hoge":["Fuga"]`) {
+	type MyType struct {
+		Hoge []string
+	}
+
+	var mt MyType
+	json.Unmarshal(data, &mt)
+	if !reflect.DeepEqual(mt.Hoge, []string{"Fuga"}) {
 		t.Fatalf("Error by not contains header. %v", string(data))
 	}
 }
