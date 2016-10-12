@@ -65,3 +65,18 @@ func TestHeader(t *testing.T) {
 		t.Fatalf("Error by header. %v", r.Header)
 	}
 }
+
+func TestSetContentType(t *testing.T) {
+	ts := httptest.NewServer(sampleHandler)
+	defer ts.Close()
+	r, err := http.Get(ts.URL + "?Content-Type=text/plain")
+	if err != nil {
+		t.Fatalf("Error by http.Get(). %v", err)
+	}
+	if r.StatusCode != 200 {
+		t.Fatalf("Error by status code. %v", r.Status)
+	}
+	if r.Header["Content-Type"][0] != "text/plain" {
+		t.Fatalf("Error by header. %v", r.Header)
+	}
+}

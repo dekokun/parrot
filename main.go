@@ -16,12 +16,15 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	headers["Host"] = []string{r.Host}
 	json, _ := json.Marshal(r.Header)
 	log.Print(r.URL.Query())
+
+	if r.URL.Query()["Content-Type"] != nil {
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	}
 	for k, vs := range r.URL.Query() {
 		values := strings.Join(vs, ",")
 		w.Header().Set(k, values)
 	}
 
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 	w.Write(json)
 
