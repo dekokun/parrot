@@ -17,7 +17,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	json, _ := json.Marshal(r.Header)
 	log.Print(r.URL.Query())
 
-	if _, ok := r.URL.Query()["Content-Type"]; ok {
+	if r.URL.Query()["Content-Type"] != nil {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	}
 	for k, vs := range r.URL.Query() {
