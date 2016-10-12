@@ -15,7 +15,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	headers := r.Header
 	headers["Host"] = []string{r.Host}
 	json, _ := json.Marshal(r.Header)
-	log.Print(r.URL.Query())
 
 	if r.URL.Query()["Content-Type"] != nil {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -27,8 +26,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(200)
 	w.Write(json)
-
-	log.Print("get request")
 }
 
 func main() {
