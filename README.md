@@ -8,13 +8,13 @@ Parrot is a dummy responce server.
 
 ### listen port 8080
 
-```
+```bash
 $ parrot -p 8080
 ```
 
 ### Change responce header
 
-```
+```bash
 $ curl -IXGET localhost:8080
 HTTP/1.1 200 OK
 Date: Thu, 13 Oct 2016 00:05:18 GMT
@@ -31,7 +31,7 @@ Content-Type: text/plain; charset=utf-8
 
 ### Get request header
 
-```
+```bash
 $ curl --header 'X-Forwarded-For: x.x.x.x' localhost:8080
 {"Accept":["*/*"],"Host":["localhost:8080"],"User-Agent":["curl/7.43.0"],"X-Forwarded-For":["x.x.x.x"]}
 ```
