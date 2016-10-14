@@ -33,5 +33,5 @@ func main() {
 	flag.IntVar(&port, "port", 30000, "listen port")
 	flag.Parse()
 	http.HandleFunc("/", rootHandler)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", strconv.Itoa(port)), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", strconv.Itoa(port)), nil))
 }
