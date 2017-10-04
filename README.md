@@ -4,6 +4,14 @@
 
 Parrot is a dummy responce server.
 
+## Usage
+
+```
+Usage of parrot:
+  -port int
+          listen port (default 30000)
+```
+
 ## Example
 
 ### listen port 8080
@@ -36,3 +44,16 @@ $ curl --header 'X-Forwarded-For: x.x.x.x' localhost:8080
 {"Accept":["*/*"],"Host":["localhost:8080"],"User-Agent":["curl/7.43.0"],"X-Forwarded-For":["x.x.x.x"]}
 ```
 
+## Installation
+
+```
+$ go get github.com/dekokun/parrot
+```
+
+## License
+
+MIT
+
+## Author
+
+Shintaro Kurachi (a.k.a. dekokub)

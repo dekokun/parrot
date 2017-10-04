@@ -15,7 +15,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	headers := r.Header
 	headers["Host"] = []string{r.Host}
 	json, _ := json.Marshal(r.Header)
-	log.Print(r.URL.Query())
 
 	if r.URL.Query()["Content-Type"] != nil {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -27,8 +26,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(200)
 	w.Write(json)
-
-	log.Print("get request")
 }
 
 func main() {
@@ -36,5 +33,5 @@ func main() {
 	flag.IntVar(&port, "port", 30000, "listen port")
 	flag.Parse()
 	http.HandleFunc("/", rootHandler)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", strconv.Itoa(port)), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", strconv.Itoa(port)), nil))
 }
