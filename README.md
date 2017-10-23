@@ -17,7 +17,7 @@ Usage of parrot:
 ### listen port 8080
 
 ```bash
-$ parrot -p 8080
+$ parrot -port 8080
 ```
 
 ### Change responce header
