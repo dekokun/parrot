@@ -56,4 +56,4 @@ MIT
 
 ## Author
 
-Shintaro Kurachi (a.k.a. dekokub)
+Shintaro Kurachi (a.k.a. dekokun)
