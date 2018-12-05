@@ -99,3 +99,22 @@ func TestStatusCode(t *testing.T) {
 		t.Fatalf("Error by status code. %v", r.Status)
 	}
 }
+
+func TestStatusCodeFail(t *testing.T) {
+	ts := httptest.NewServer(sampleHandler)
+	defer ts.Close()
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", ts.URL, nil)
+	req.Header.Add("X-Parrot-Status", "foo")
+	r, err := client.Do(req)
+	if err != nil {
+		t.Fatalf("Error by http.Get(). %v", err)
+	}
+	_, err = ioutil.ReadAll(r.Body)
+	if err != nil {
+		t.Fatalf("Error by ioutil.ReadAll(). %v", err)
+	}
+	if r.StatusCode != 200 {
+		t.Fatalf("Error by status code. %v", r.Status)
+	}
+}
