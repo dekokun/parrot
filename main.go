@@ -39,7 +39,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var port int
-	flag.IntVar(&port, "port", 30000, "listen port")
+	flag.IntVar(&port, "port", 8080, "listen port")
 	flag.Parse()
 	http.HandleFunc("/", rootHandler)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", strconv.Itoa(port)), nil))
