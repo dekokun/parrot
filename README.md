@@ -56,7 +56,7 @@ put below 2 files, docker-compose.yml and nginx.conf, to same dir and `docker-co
 
 ### docker-compose.yml
 
-```
+```yml
 version: '3'
 services:
   parrot:
@@ -72,7 +72,7 @@ services:
 ```
 
 ### nginx.conf
-```
+```Nginx
 user  nginx;
 worker_processes  1;
 
