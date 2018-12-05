@@ -86,24 +86,16 @@ func TestStatusCode(t *testing.T) {
 	defer ts.Close()
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", ts.URL, nil)
-	req.Header.Add("Status", "503")
+	req.Header.Add("X-Parrot-Status", "503")
 	r, err := client.Do(req)
 	if err != nil {
 		t.Fatalf("Error by http.Get(). %v", err)
 	}
-	data, err := ioutil.ReadAll(r.Body)
+	_, err = ioutil.ReadAll(r.Body)
 	if err != nil {
 		t.Fatalf("Error by ioutil.ReadAll(). %v", err)
 	}
 	if r.StatusCode != 503 {
 		t.Fatalf("Error by status code. %v", r.Status)
-	}
-	type MyType struct {
-		Status []string
-	}
-	var mt MyType
-	json.Unmarshal(data, &mt)
-	if !reflect.DeepEqual(mt.Status, []string{"503"}) {
-		t.Fatalf("Error by not contains header. %v", string(data))
 	}
 }

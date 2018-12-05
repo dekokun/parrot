@@ -16,9 +16,9 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	headers["Host"] = []string{r.Host}
 	json, _ := json.Marshal(r.Header)
 	statusCode := 200
-	if r.Header["Status"] != nil {
+	if r.Header["X-Parrot-Status"] != nil {
 		var err error
-		statusCode, err = strconv.Atoi(r.Header["Status"][0])
+		statusCode, err = strconv.Atoi(r.Header["X-Parrot-Status"][0])
 		if err != nil {
 			log.Print("invalid status code. set 200.")
 			statusCode = 200
