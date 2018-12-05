@@ -15,6 +15,15 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	headers := r.Header
 	headers["Host"] = []string{r.Host}
 	json, _ := json.Marshal(r.Header)
+	statusCode := 200
+	if r.Header["Status"] != nil {
+		var err error
+		statusCode, err = strconv.Atoi(r.Header["Status"][0])
+		if err != nil {
+			log.Print("invalid status code. set 200.")
+			statusCode = 200
+		}
+	}
 
 	if r.URL.Query()["Content-Type"] != nil {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -24,7 +33,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(k, values)
 	}
 
-	w.WriteHeader(200)
+	w.WriteHeader(statusCode)
 	w.Write(json)
 }
 
