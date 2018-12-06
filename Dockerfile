@@ -7,4 +7,4 @@ RUN cd /src && go build -o parrot
 FROM alpine
 WORKDIR /app
 COPY --from=build-env /src/parrot /app/
-ENTRYPOINT ./parrot
+ENTRYPOINT ["./parrot"]
