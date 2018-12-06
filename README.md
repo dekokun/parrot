@@ -14,6 +14,21 @@ Usage of parrot:
 
 ## Example
 
+### docker
+
+```bash
+$ docker pull dekokun/parrot
+$ docker run -p 80:8080 dekokun/parrot
+```
+
+### docker compose example
+
+```bash
+$ cd example
+$ docker-compose up
+$ curl --header 'Foo:Bar' localhost
+```
+
 ### listen port 8080
 
 ```bash
@@ -49,12 +64,6 @@ $ curl --header 'X-Forwarded-For: x.x.x.x' localhost:8080
 ```
 $ go get github.com/dekokun/parrot
 ```
-
-## docker compose example
-
-$ cd example
-$ docker-compose up
-$ curl --header 'Foo:Bar' localhost
 
 ## License
 
