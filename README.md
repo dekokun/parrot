@@ -16,9 +16,11 @@ Usage of parrot:
 
 ### docker
 
+Default port is 80 in Dockerfile.
+
 ```bash
 $ docker pull dekokun/parrot
-$ docker run -p 80:8080 dekokun/parrot
+$ docker run -p 80:80 dekokun/parrot
 $ curl --header 'Foo:Bar' localhost
 ```
 
