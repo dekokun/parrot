@@ -50,73 +50,11 @@ $ curl --header 'X-Forwarded-For: x.x.x.x' localhost:8080
 $ go get github.com/dekokun/parrot
 ```
 
-## use with docker compose example
+## docker compose example
 
-put below 2 files, docker-compose.yml and nginx.conf, to same dir and `docker-compose up`
-
-### docker-compose.yml
-
-```yml
-version: '3'
-services:
-  parrot:
-    image: dekokun/parrot
-  proxy:
-    image: 'nginx:1.15.7'
-    volumes:
-      - './nginx.conf:/etc/nginx/nginx.conf'
-    depends_on:
-      - parrot
-    ports:
-      - '80:80'
-```
-
-### nginx.conf
-```Nginx
-user  nginx;
-worker_processes  1;
-
-error_log  /dev/stderr info;
-pid        /var/run/nginx.pid;
-
-
-events {
-    worker_connections  1024;
-}
-
-http {
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
-
-    log_format ltsv "time:$time_local"
-                "\tstatus:$status"
-                "\treqtime:$request_time"
-                "\tupstream:$upstream_addr"
-                "\tupstream_status:$upstream_status"
-                "\tvhost:$host";
-
-    access_log  /dev/stdout  ltsv;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    keepalive_timeout  65;
-
-    #gzip  on;
-    upstream myapp {
-        server parrot:8080;
-    }
-
-    server {
-        listen       80;
-        server_name  localhost;
-        location / {
-            proxy_pass   http://myapp;
-        }
-    }
-
-}
-```
+$ cd example
+$ docker-compose up
+$ curl --header 'Foo:Bar' localhost
 
 ## License
 
