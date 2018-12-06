@@ -19,9 +19,13 @@ Usage of parrot:
 ```bash
 $ docker pull dekokun/parrot
 $ docker run -p 80:8080 dekokun/parrot
+$ curl --header 'Foo:Bar' localhost
 ```
 
-### docker compose example
+### docker compose
+
+proxy server: nginx
+app server: parrot
 
 ```bash
 $ cd example
