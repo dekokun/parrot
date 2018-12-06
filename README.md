@@ -9,7 +9,7 @@ Parrot is a dummy responce server.
 ```
 Usage of parrot:
   -port int
-          listen port (default 30000)
+          listen port (default 8080)
 ```
 
 ## Example
